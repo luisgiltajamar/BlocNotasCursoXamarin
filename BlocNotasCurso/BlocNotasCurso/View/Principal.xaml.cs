@@ -8,13 +8,11 @@ using Xamarin.Forms;
 
 namespace BlocNotasCurso.View
 {
-    public partial class Login : ContentPage
+    public partial class Principal : ContentPage
     {
-        public Login()
+        public Principal()
         {
             InitializeComponent();
         }
-
-       
     }
 }

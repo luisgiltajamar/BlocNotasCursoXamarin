@@ -11,8 +11,10 @@ namespace BlocNotasCurso.Modulo
             builder.RegisterType<ViewFactory>().
                 As<IViewFactory>().
                 SingleInstance();
+
             builder.RegisterType<Navigator>().
                 As<INavigator>().SingleInstance();
+
             builder.Register<INavigation>(
                 ctx=> App.Current.MainPage.Navigation).SingleInstance();
 
