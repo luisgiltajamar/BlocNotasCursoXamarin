@@ -44,19 +44,26 @@ namespace BlocNotasCurso.Factorias
             return viewModel;
         }
 
-        public Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel) where TViewModel : class, IViewModel
+        public async Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel) where TViewModel : class, IViewModel
         {
-            throw new NotImplementedException();
+            var vista = _viewFactory.Resolve<TViewModel>(viewModel);
+            await Navigation.PushAsync(vista);
+            return viewModel;
         }
 
-        public Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> action = null) where TViewModel : class, IViewModel
+        public async Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> action = null) where TViewModel : class, IViewModel
         {
-            throw new NotImplementedException();
+            TViewModel viewModel;
+            var vista = _viewFactory.Resolve<TViewModel>(out viewModel, action);
+            await Navigation.PushModalAsync(vista);
+            return viewModel;
         }
 
-        public Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel) where TViewModel : class, IViewModel
+        public async Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel) where TViewModel : class, IViewModel
         {
-            throw new NotImplementedException();
+            var vista = _viewFactory.Resolve<TViewModel>(viewModel);
+            await Navigation.PushModalAsync(vista);
+            return viewModel;
         }
     }
 }
