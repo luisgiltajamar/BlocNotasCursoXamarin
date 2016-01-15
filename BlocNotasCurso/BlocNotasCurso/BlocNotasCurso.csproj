@@ -36,7 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Factorias\INavigator.cs" />
+    <Compile Include="Factorias\IPage.cs" />
     <Compile Include="Factorias\IVIewFactory.cs" />
+    <Compile Include="Factorias\Navigator.cs" />
+    <Compile Include="Factorias\PageProxy.cs" />
     <Compile Include="Factorias\ViewFactory.cs" />
     <Compile Include="Model\Bloc.cs" />
     <Compile Include="Model\Nota.cs" />
