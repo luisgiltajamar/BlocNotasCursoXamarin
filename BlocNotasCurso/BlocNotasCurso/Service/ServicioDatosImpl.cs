@@ -12,6 +12,7 @@ namespace BlocNotasCurso.Service
 
         public ServicioDatosImpl()
         {
+            
             client=new MobileServiceClient(Cadenas.UrlServicio,
                 Cadenas.TokenServicio);
             
@@ -19,30 +20,46 @@ namespace BlocNotasCurso.Service
         public async Task<Usuario> ValidarUsuario(Usuario us)
         {
             var tabla = client.GetTable<Usuario>();
-            var data = await tabla.CreateQuery().
-                Where(o => o.Login == us.Login && o.Password == us.Password).
-                ToListAsync();
+            try
+            {
+                var data = await tabla.CreateQuery().
+                    Where(o => o.Login == us.Login && o.Password == us.Password).
+                    ToListAsync();
 
-            if (data.Count == 0)
+                if (data.Count == 0)
+                    return null;
+
+                return data[0];
+            }
+            catch (Exception e)
+            {
                 return null;
-
-            return data[0];
+            }
         }
 
         public async Task<Usuario> AddUsuario(Usuario us)
         {
+          
             var tabla = client.GetTable<Usuario>();
-            var data = await tabla.CreateQuery().Where(o => o.Login == us.Login)
-                .ToListAsync();
-            if(data.Count>0)
-                throw new Exception("Usuario ya registrado");
+
             try
             {
-                await tabla.InsertAsync(us);
+                var data = await tabla.CreateQuery().Where(o => o.Login == us.Login)
+                    .ToListAsync();
+                if (data.Count > 0)
+                    return null;
             }
             catch (Exception e)
             {
-                throw new Exception("Error al registrar el usuario");
+                
+            }
+
+            try { 
+            await tabla.InsertAsync(us);
+            }
+            catch (Exception e)
+            {
+                return null;
             }
             return us;
         }

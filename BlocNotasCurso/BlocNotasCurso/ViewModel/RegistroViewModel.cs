@@ -3,6 +3,7 @@ using BlocNotasCurso.Factorias;
 using BlocNotasCurso.Model;
 using BlocNotasCurso.Service;
 using BlocNotasCurso.ViewModel.Base;
+using Xamarin.Forms;
 
 namespace BlocNotasCurso.ViewModel
 {
@@ -16,9 +17,10 @@ namespace BlocNotasCurso.ViewModel
             set { SetProperty(ref _usuario , value); }
         }
 
-        private Usuario _usuario;
+        private Usuario _usuario=new Usuario();
         public RegistroViewModel(INavigator navigator, IServicioDatos servicio) : base(navigator, servicio)
         {
+            cmdAlta=new Command(GuardarUsuario);
         }
 
         private async void GuardarUsuario()
