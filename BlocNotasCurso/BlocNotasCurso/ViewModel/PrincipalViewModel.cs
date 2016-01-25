@@ -23,6 +23,7 @@ namespace BlocNotasCurso.ViewModel
             IServicioDatos servicio, Session session) : 
             base(navigator, servicio, session)
         {
+            var a = "";
            CmdNuevo=new Command(NuevoBloc);
         }
 
