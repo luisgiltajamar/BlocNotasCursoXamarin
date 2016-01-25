@@ -19,6 +19,7 @@ namespace BlocNotasCurso.ViewModel
         {
            cmdLogin=new Command(IniciarSesion);
             cmdAlta=new Command(NuevoUsuario);
+			Titulo="Blocs";
         }
 
         public string TituloIniciar { get { return "Inicar sesión"; } }
@@ -49,7 +50,7 @@ namespace BlocNotasCurso.ViewModel
                     await _navigator.PopToRootAsync();
                     await _navigator.PushAsync<PrincipalViewModel>(viewModel =>
                     {
-                        Titulo = "Pagina de inicio";
+					    viewModel.Titulo = "Pagina de inicio";
                         viewModel.Blocs=new ObservableCollection<Bloc>(blocs);
                         
                     });
@@ -72,7 +73,7 @@ namespace BlocNotasCurso.ViewModel
            // await _navigator.PopToRootAsync();
             await _navigator.PushModalAsync<RegistroViewModel>(viewModel =>
             {
-                Titulo = "Nuevo Usuario";
+					viewModel.Titulo = "Nuevo Usuario";
             });
         }
 

@@ -38,7 +38,7 @@ namespace BlocNotasCurso.ViewModel
                     await _navigator.PushModalAsync
                         <PrincipalViewModel>(viewModel =>
                     {
-                        Titulo = "Principal";
+							viewModel.Titulo = "Principal";
                         viewModel.Blocs=
                             new ObservableCollection<Bloc>();
                     });

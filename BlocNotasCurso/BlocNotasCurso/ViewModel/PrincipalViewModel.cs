@@ -32,7 +32,7 @@ namespace BlocNotasCurso.ViewModel
             await _navigator.
                 PushAsync<NuevoBlocViewModel>(viewModel =>
                 {
-                    Titulo = "Nuevo bloc";
+					viewModel.Titulo = "Nuevo bloc";
                     viewModel.Blocs = Blocs;
                 });
 

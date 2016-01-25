@@ -19,11 +19,11 @@ namespace BlocNotasCurso.Modulo
             builder.RegisterType<Login>();
             builder.RegisterType<Principal>();
             builder.RegisterType<Registro>();
-         //   builder.RegisterType<NuevoBlocView>();
+            builder.RegisterType<NuevoBlocView>();
             builder.RegisterType<LoginViewModel>();
             builder.RegisterType<PrincipalViewModel>();
             builder.RegisterType<RegistroViewModel>();
-           // builder.RegisterType<NuevoBlocViewModel>();
+            builder.RegisterType<NuevoBlocViewModel>();
 
             builder.RegisterInstance<Func<Page>>(() =>
             {
