@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using BlocNotasCurso.Service;
+using BlocNotasCurso.Util;
 using BlocNotasCurso.View;
 using BlocNotasCurso.ViewModel;
 using Xamarin.Forms;
@@ -13,12 +14,16 @@ namespace BlocNotasCurso.Modulo
         {
             builder.RegisterType<ServicioDatosImpl>()
                 .As<IServicioDatos>().SingleInstance();
+            builder.RegisterType<Session>().SingleInstance();
+
             builder.RegisterType<Login>();
             builder.RegisterType<Principal>();
             builder.RegisterType<Registro>();
+         //   builder.RegisterType<NuevoBlocView>();
             builder.RegisterType<LoginViewModel>();
             builder.RegisterType<PrincipalViewModel>();
             builder.RegisterType<RegistroViewModel>();
+           // builder.RegisterType<NuevoBlocViewModel>();
 
             builder.RegisterInstance<Func<Page>>(() =>
             {

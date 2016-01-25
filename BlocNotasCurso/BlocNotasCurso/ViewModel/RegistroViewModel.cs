@@ -1,7 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using BlocNotasCurso.Factorias;
 using BlocNotasCurso.Model;
 using BlocNotasCurso.Service;
+using BlocNotasCurso.Util;
 using BlocNotasCurso.ViewModel.Base;
 using Xamarin.Forms;
 
@@ -18,7 +20,8 @@ namespace BlocNotasCurso.ViewModel
         }
 
         private Usuario _usuario=new Usuario();
-        public RegistroViewModel(INavigator navigator, IServicioDatos servicio) : base(navigator, servicio)
+        public RegistroViewModel(INavigator navigator, IServicioDatos servicio,
+            Session session) : base(navigator, servicio,session)
         {
             cmdAlta=new Command(GuardarUsuario);
         }
@@ -31,7 +34,14 @@ namespace BlocNotasCurso.ViewModel
                 var r = await _servicio.AddUsuario(_usuario);
                 if (r != null)
                 {
-                    await _navigator.PushModalAsync<PrincipalViewModel>();
+                    Session["usuario"] = r;
+                    await _navigator.PushModalAsync
+                        <PrincipalViewModel>(viewModel =>
+                    {
+                        Titulo = "Principal";
+                        viewModel.Blocs=
+                            new ObservableCollection<Bloc>();
+                    });
                 }
                 else
                 {

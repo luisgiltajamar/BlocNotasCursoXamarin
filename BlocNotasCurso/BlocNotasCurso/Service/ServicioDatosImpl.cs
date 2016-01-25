@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlocNotasCurso.Model;
 using BlocNotasCurso.Util;
@@ -17,6 +18,9 @@ namespace BlocNotasCurso.Service
                 Cadenas.TokenServicio);
             
         }
+
+        #region Usuario
+
         public async Task<Usuario> ValidarUsuario(Usuario us)
         {
             var tabla = client.GetTable<Usuario>();
@@ -39,7 +43,7 @@ namespace BlocNotasCurso.Service
 
         public async Task<Usuario> AddUsuario(Usuario us)
         {
-          
+
             var tabla = client.GetTable<Usuario>();
 
             try
@@ -51,11 +55,13 @@ namespace BlocNotasCurso.Service
             }
             catch (Exception e)
             {
-                
+
             }
 
-            try { 
-            await tabla.InsertAsync(us);
+            try
+            {
+                await tabla.InsertAsync(us);
+               
             }
             catch (Exception e)
             {
@@ -66,12 +72,49 @@ namespace BlocNotasCurso.Service
 
         public Task<Usuario> UpdateUsuario(Usuario us, string id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task DeleteUsuario(string id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+
+        #endregion
+
+
+        #region Bloc
+
+        public async Task AddBloc(Bloc bloc)
+        {
+            var table = client.GetTable<Bloc>();
+            await table.InsertAsync(bloc);
+              
+
+        }
+
+        public async Task<List<Bloc>> GetBlocs(string usuario)
+        {
+            var table = client.GetTable<Bloc>();
+            var data = await table.CreateQuery().
+                Where(o => o.IdUsuario == usuario).ToListAsync();
+            return data;
+        }
+
+        public async Task DeleteBloc(Bloc bloc)
+        {
+            var table = client.GetTable<Bloc>();
+            await table.DeleteAsync(bloc);
+        }
+
+        public async Task UpdateBloc(Bloc bloc)
+        {
+            var table = client.GetTable<Bloc>();
+            await table.UpdateAsync(bloc);
+        }
+
+        #endregion
+
+
     }
 }
